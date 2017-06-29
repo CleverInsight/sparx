@@ -77,7 +77,6 @@ def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, 
 	if label_encode:
 		dataframe = dataframe.apply(LabelEncoder().fit_transform)
 
-
 	Y = dataframe.pop(target)
 	X = dataframe
  
