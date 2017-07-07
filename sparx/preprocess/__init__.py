@@ -11,80 +11,107 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
+import dateutil.parser as parser
+from datetime import datetime
 
 
 
 
 class process:
 
-	def __init__(self):
-		self.version = 0.0.1
+    def __init__(self):
+        self.version = "0.0.1"
 
+
+    def datestring_to_dd_mm_yy(self, datestring):
+        ''' Return a dictionary of year, month,day, hour, minute and second
+
+        Parameters:
+        -----------
+
+            datestring: str
+                Enter the datetime string
+
+
+        Usage:
+        ------
+
+            >> p = preprocess()
+            >> p.datestring_to_dd_mm_yy("march/1/1980")
+            >> {'second': '00', 'hour': '00', 'year': '1980', 'day': '01', 'minute': '00', 'month': '03'}
+
+        '''
+
+
+        d, t = str(parser.parse(datestring)).split(' ')
+        d = d.split('-')
+        t = t.split(':')
+        return dict(year=d[0], month=d[1],  day=d[2], hour=t[0], minute=t[1], second=t[2])
 
 
 
 def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, impute=True, auto=True, exclude=[]):
-	'''
+    '''
     Returns a tuple which consist of X - Features, Y - Target, Report
     which is gives the parameters passed to the function
 
     Parameters
     ----------
-    	dataframe : Dataframes
-        	pandas dataframes to be given as input
+        dataframe : Dataframes
+            pandas dataframes to be given as input
         target : str
-        	Response value to predict(col name)
+            Response value to predict(col name)
         label_encode: boolean
-        	True (default) - Label Encode categorical variable to int64
+            True (default) - Label Encode categorical variable to int64
         scale : boolean
-        	True (default) - Reduce the dimension of the given vector array
+            True (default) - Reduce the dimension of the given vector array
         ohe: boolean
-        	True (default) - One hot encoding of variables
+            True (default) - One hot encoding of variables
         impute: boolean
-        	True (default) - Impute the missing value using mean, median or std
+            True (default) - Impute the missing value using mean, median or std
         auto: str
-        	True (default) - Make all decision automatically bypass all parameters
-        	to true
+            True (default) - Make all decision automatically bypass all parameters
+            to true
         exclude: list
-        	List of column names which needs to be removed before operation
+            List of column names which needs to be removed before operation
 
     Examples
     --------
     Usage::
         dataframe : Dataframes
-        	pd.Dataframe(['Curd ', 'GOOG APPL MS', 'A B C', 'T Test is'])
+            pd.Dataframe(['Curd ', 'GOOG APPL MS', 'A B C', 'T Test is'])
         target : str
-        	Response value to predict(col name)
+            Response value to predict(col name)
         label_encode: boolean
-        	True (default) - Label Encode categorical variable to int64
+            True (default) - Label Encode categorical variable to int64
         scale : boolean
-        	True (default) - Reduce the dimension of the given vector array
+            True (default) - Reduce the dimension of the given vector array
         ohe: boolean
-        	True (default) - One hot encoding of variables
+            True (default) - One hot encoding of variables
         impute: boolean
-        	True (default) - Impute the missing value using mean, median or std
+            True (default) - Impute the missing value using mean, median or std
         auto: str
-        	True (default) - Make all decision automatically bypass all parameters
-        	to true
+            True (default) - Make all decision automatically bypass all parameters
+            to true
         exclude: list
-        	List of column names which needs to be removed before operation
+            List of column names which needs to be removed before operation
 
-	'''
+    '''
 
-	df_copy = dataframe.copy()
+    df_copy = dataframe.copy()
 
 
-	if label_encode:
-		dataframe = dataframe.apply(LabelEncoder().fit_transform)
+    if label_encode:
+        dataframe = dataframe.apply(LabelEncoder().fit_transform)
 
-	Y = dataframe.pop(target)
-	X = dataframe
+    Y = dataframe.pop(target)
+    X = dataframe
  
 
 
 
-	return {
-		'features' : dataframe.head(),
-		'target': target
-	}
+    return {
+        'features' : dataframe.head(),
+        'target': target
+    }
 
