@@ -6,11 +6,11 @@
 """
 import numpy as np
 import pandas as pd
-# from sklearn import preprocessing
-# from sklearn.preprocessing import LabelEncoder
-# from sklearn.preprocessing import OneHotEncoder
-# from sklearn.preprocessing import Imputer
-# from sklearn.preprocessing import StandardScaler
+from sklearn import preprocessing
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import Imputer
+from sklearn.preprocessing import StandardScaler
 
 
 
@@ -22,32 +22,12 @@ class process:
         self.version = "0.0.1"
         
 
+    def impute(self, df, strategy='mean'):
 
-    def string_concat(self, a, b):
-        '''
-        Returns a string which is the concatenated output of parameter a, and b
+        im = Imputer(strategy='mean')
+        im.fit(df)
 
-        Parameters
-        -----------
-
-            a: string
-            b: string
-
-        Usage:
-        -------
-
-            a: string
-                "firstname"
-            b: string
-                "lastname"
-        '''
-        return a + b
-
-    @staticmethod
-    def get_full_name(a, b):
-        return a + b
-
-
+        return im.transform(df.values)
 
 
 
