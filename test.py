@@ -6,10 +6,6 @@ from sparx.preprocess import *
 
 # print auto_clean(data.head(100), 'c240bDscr')
 
-p = process()
+p = Process()
 
-a = "march/1/1980"
-
-result = p.datestring_to_dd_mm_yy(a)
-
-print result
+print p.get_version()

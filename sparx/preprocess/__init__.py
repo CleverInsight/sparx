@@ -4,6 +4,7 @@
     Authors: Bastin Robins. J
     Email : robin@cleverinsight.com
 """
+from datetime import datetime
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -12,18 +13,18 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
 import dateutil.parser as parser
-from datetime import datetime
 
 
 
-
-class process:
+class Process(object):
+    ''' Cleaner class which can clean the dataset
+    '''
 
     def __init__(self):
         self.version = "0.0.1"
 
-
-    def datestring_to_dd_mm_yy(self, datestring):
+    @staticmethod
+    def datestring_to_dd_mm_yy(datestring):
         ''' Return a dictionary of year, month,day, hour, minute and second
 
         Parameters:
@@ -38,19 +39,24 @@ class process:
 
             >> p = preprocess()
             >> p.datestring_to_dd_mm_yy("march/1/1980")
-            >> {'second': '00', 'hour': '00', 'year': '1980', 'day': '01', 'minute': '00', 'month': '03'}
+            >> {'second': '00', 'hour': '00', 'year': '1980', 'day': '01',
+            'minute': '00', 'month': '03'}
 
         '''
 
 
-        d, t = str(parser.parse(datestring)).split(' ')
-        d = d.split('-')
-        t = t.split(':')
-        return dict(year=d[0], month=d[1],  day=d[2], hour=t[0], minute=t[1], second=t[2])
+        date, time = str(parser.parse(datestring)).split(' ')
+        date = date.split('-')
+        time = time.split(':')
+        return dict(year=date[0], month=date[1], day=date[2],\
+         hour=time[0], minute=time[1], second=time[2])
 
 
+    def get_version(self):
+        ''' Return a version number'''
+        return self.version
 
-def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, impute=True, auto=True, exclude=[]):
+def auto_clean(dataframe, target=None, label_encode=True, auto=True, exclude=None):
     '''
     Returns a tuple which consist of X - Features, Y - Target, Report
     which is gives the parameters passed to the function
@@ -95,7 +101,6 @@ def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, 
             to true
         exclude: list
             List of column names which needs to be removed before operation
-
     '''
 
     df_copy = dataframe.copy()
@@ -104,14 +109,10 @@ def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, 
     if label_encode:
         dataframe = dataframe.apply(LabelEncoder().fit_transform)
 
-    Y = dataframe.pop(target)
-    X = dataframe
- 
-
-
+    target = dataframe.pop(target)
+    features = dataframe
 
     return {
         'features' : dataframe.head(),
         'target': target
     }
-
