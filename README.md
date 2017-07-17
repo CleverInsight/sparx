@@ -1,4 +1,4 @@
 ## Sparx
 
-.. image:: https://raw.githubusercontent.com/requests/requests/master/docs/_static/requests-logo-small.png
-    :target: http://sparx.readthedocs.org/
+.. image:: http://sparx.readthedocs.io/en/latest/_images/logo.png
+    :target: http://sparx.readthedocs.org
