@@ -16,6 +16,7 @@ Sparx's documentation!
    help
    installation
    usage
+   contributors
 
 
 
