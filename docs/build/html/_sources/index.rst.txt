@@ -6,6 +6,10 @@
 Sparx's documentation!
 =======================
 
+.. image:: https://raw.githubusercontent.com/sparx/sparx/master/docs/_static/logo.png
+    :target: http://sparx.readthedocs.org
+
+
 .. toctree::
    :maxdepth: 2
 
