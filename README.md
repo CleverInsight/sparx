@@ -1,4 +1,3 @@
 ## Sparx
 
-.. image:: http://sparx.readthedocs.io/en/latest/_images/logo.png
-    :target: http://sparx.readthedocs.org
+[<img src="http://sparx.readthedocs.io/en/latest/_images/logo.png">](http://sparx.readthedocs.org/)
