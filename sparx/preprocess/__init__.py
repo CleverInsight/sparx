@@ -5,6 +5,7 @@
     Email : robin@cleverinsight.com
 """
 from urllib import urlencode
+import logging
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -48,29 +49,29 @@ class Process(object):
         return urlencode(query_dict)
 
     @staticmethod
-    def describe(df, col_name):
+    def describe(dataframe, col_name):
         ''' Return the basic description of an column in a pandas dataframe
         check if the column is an interger or float type
 
         Parameters:
         -----------
-            df: pandas dataframe
+            dataframe: pandas dataframe
             col_name: str
                 any one column name in the dataframe passed
         Usage:
         ------
             >> p = Process()
-            >> p.describe(df, 'Amount')
+            >> p.describe(dataframe, 'Amount')
             >> {'min': 0, 'max': 100, 'mean': 50, 'median': 49 }
 
         '''
 
         try:
-            return dict(min=df[col_name].min(), max=df[col_name].max(),\
-             mean=df[col_name].mean(), median=df[col_name].median())
+            return dict(min=dataframe[col_name].min(), max=dataframe[col_name].max(),\
+             mean=dataframe[col_name].mean(), median=dataframe[col_name].median())
 
         except Exception as e:
-            return E
+            logging.exception(e)
 
     @staticmethod
     def encode(data):
@@ -109,3 +110,23 @@ class Process(object):
 
         return (data, hash_map)
 
+    @staticmethod
+    def impute(dataframe, col_name, statergy='mean'):
+        ''' Return a dataframe which is complete imputed with respective
+        column mean value
+
+        Parameters:
+        -----------
+            dataframe : pandas.core.dataframe
+            col_name : str
+                column name to select for impute in dataframe
+            statergy : str default('mean') mean, median, min, max, std
+                Statergy to impute the given column
+
+        Usage:
+
+            >> p = Process()
+            >> p.impute(dataframe, 'Age')
+        '''
+
+        return dataframe
