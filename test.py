@@ -8,7 +8,4 @@ data = pd.read_csv('data/iris.csv')
 
 p = Process()
 
-a = p.encode(data)
-
-print a
-print type(a)
+print p.is_categorical(data['Species'])

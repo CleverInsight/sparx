@@ -26,6 +26,15 @@ class Process(object):
         self.version = "0.0.1"
 
     @staticmethod
+    def is_categorical(dataframe):
+        ''' comment '''
+        if dataframe.dtypes == 'object':
+            return True
+        else:
+            return False
+        
+
+    @staticmethod
     def dict_query_string(query_dict):
         ''' Return a string which is the query formed using the given dictionary
         as parameter
