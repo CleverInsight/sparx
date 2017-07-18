@@ -13,6 +13,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
 import dateutil.parser as parser
+from geopy.geocoders import Nominatim
 
 
 
@@ -22,6 +23,31 @@ class Process(object):
 
     def __init__(self):
         self.version = "0.0.1"
+
+    @staticmethod
+    def geocode(address):
+        ''' Return full address, latitude and longitude of give address string
+
+        Parameters:
+        -----------
+            address: str
+                Enter a dictionary of address whose latitude and longitude
+                should be returned
+
+        Usage:
+        ------
+            >> p = preprocess()
+            >> p.geocode("172 5th Avenue NYC")
+            >> {'latitude': 40.74111015, 'adress': u'172, 5th Avenue, Flatiron,
+             Manhattan, Manhattan Community Board 5, New York County, NYC,
+             New York, 10010, United States of America',
+            'longitude': -73.9903105}
+
+        '''
+        geolocator = Nominatim()
+        location = geolocator.geocode(address)
+        return dict(adress=location.address, latitude=location.latitude,\
+            longitude=location.longitude)
 
     @staticmethod
     def datestring_to_dd_mm_yy(datestring):

@@ -1,4 +1,5 @@
 from sparx.preprocess import *
+from geopy.geocoders import Nominatim
 # import pandas as pd
 
 
@@ -9,3 +10,4 @@ from sparx.preprocess import *
 p = Process()
 
 print p.get_version()
+print (p.geocode("172 5th Avenue NYC"))
