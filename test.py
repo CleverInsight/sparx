@@ -1,10 +1,8 @@
-from sparx.preprocess import  *
+'''function to count the missing values in columns'''
+from sparx.preprocess import Process
 import pandas as pd
+import numpy as np
 
-
-data = pd.read_csv('data.csv')
-
-#print auto_clean(data.head(100), 'c240bDscr')
-
-p = process()
-print p.impute(data['marks'])
+DATA = pd.read_csv('data.csv')
+P = Process()
+print P.count_Nan(DATA['name'])

@@ -11,25 +11,22 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
+from sparx.preprocess import *
 
-
-
-
-
-class process:
+class Process:
 
     def __init__(self):
         self.version = "0.0.1"
         
-
     def impute(self, df, strategy='mean'):
 
         im = Imputer(strategy='mean')
         im.fit(df)
-
         return im.transform(df.values)
 
-
+    @staticmethod
+    def count_Nan(col_name):
+        return col_name.isnull().sum()
 
 def auto_clean(dataframe, target=None, label_encode=True, scale=True, ohe=True, impute=True, auto=True, exclude=[]):
     '''
