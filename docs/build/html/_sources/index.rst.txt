@@ -6,12 +6,17 @@
 Sparx's documentation!
 =======================
 
+.. image:: nstatic/logo.png
+    :target: http://sparx.readthedocs.org
+
+
 .. toctree::
    :maxdepth: 2
 
    help
    installation
    usage
+   contributors
 
 
 
