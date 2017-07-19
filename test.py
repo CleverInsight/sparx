@@ -2,13 +2,15 @@ from sparx.preprocess import *
 from geopy.geocoders import Nominatim
 import pandas as pd
 import numpy as np
-data = pd.read_csv('data.csv')
 
-# data = pd.read_csv('/Users/bastinrobins/Downloads/vehicles.read_csv')
+data = pd.read_csv('data/iris.csv')
 
-# print auto_clean(data.head(100), 'c240bDscr')
+# Encode the dataframe and give the label encoded
 
 p = Process()
+
+print p.is_categorical(data['Species'])
+
 
 print p.get_version()
 print p.geocode("172 5th Avenue NYC")

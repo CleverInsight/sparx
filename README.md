@@ -1,2 +1,3 @@
-# sparx
-Data Munging, Data Wrangling and Data Preparation Simplified
+## Sparx
+
+[<img src="http://sparx.readthedocs.io/en/latest/_images/logo.png">](http://sparx.readthedocs.org/)

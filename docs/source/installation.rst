@@ -5,4 +5,6 @@
 Installation
 =================
 
-TODO: write content
+	>> pip install sparx
+
+	
