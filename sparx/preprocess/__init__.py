@@ -46,8 +46,43 @@ class Process(object):
         '''
         geolocator = Nominatim()
         location = geolocator.geocode(address)
-        return dict(adress=location.address, latitude=location.latitude,\
+        return dict(address=location.address, latitude=location.latitude,\
             longitude=location.longitude)
+
+    @staticmethod
+    def unique_value_count(df):
+        '''
+        return unique value count of each column as dict mapped
+
+        Parameters:
+        -----------
+            column_name: str
+                Enter the column for checking unique values
+
+        Usage:
+        ------
+            >> p = preprocess()
+            >> p.unique_value_count(data['name'])
+            >> {'gender': {'Male': 2, 'Female': 6}, 
+            'age': {32: 2, 34: 2, 35: 1, 37: 1, 21: 1, 28: 1}, 
+            'name': {'Neeta': 1, 'vandana': 2, 'Amruta': 1, 'Vikrant': 2, 
+            'vanana': 1, 'Pallavi': 1}}
+
+        '''
+        response = {}
+        for col in df.columns:
+            response[col] = dict(df[col].value_counts())
+        return response
+
+        #return dict(column_name.unique())
+        
+    @staticmethod
+    def unique_identifier(data):
+        unique_col = []
+        for col in data.columns:
+            if((len(data[col].unique())) == (data[col].size)):
+                unique_col.append(col)
+        return unique_col
 
     @staticmethod
     def datestring_to_dd_mm_yy(datestring):
