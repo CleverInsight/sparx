@@ -13,23 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
-from sparx.preprocess import Process
 
-class Process:
-
-    def __init__(self):
-        self.version = "0.0.1"
-        
-    def impute(self, df, strategy='mean'):
-
-        im = Imputer(strategy='mean')
-        im.fit(df)
-        return im.transform(df.values)
-
-'''<<<<<<< HEAD'''
-    @staticmethod
-    def count_Nan(col_name):
-        return col_name.isnull().sum()
 
 class Process(object):
     ''' Process class consist for best micro-level preprocessing
@@ -47,6 +31,25 @@ class Process(object):
         else:
             return False
         
+    @staticmethod
+    def count_missing(data):
+        ''' Return the count of missing values 
+
+        Paratmers:
+        ----------
+            data: pandas.core.series
+                given a column in pandas dataframe
+        
+        Usage:
+        -------
+            >>> p = Process()
+            >>> p.count_missing(df['col_name']) 
+            >>> 0
+
+        '''
+        return col_name.isnull().sum()
+
+
 
     @staticmethod
     def dict_query_string(query_dict):
@@ -132,25 +135,3 @@ class Process(object):
                 data[col] = label.transform(data[col])
 
         return (data, hash_map)
-
-    @staticmethod
-    def impute(dataframe, col_name, statergy='mean'):
-        ''' Return a dataframe which is complete imputed with respective
-        column mean value
-
-        Parameters:
-        -----------
-            dataframe : pandas.core.dataframe
-            col_name : str
-                column name to select for impute in dataframe
-            statergy : str default('mean') mean, median, min, max, std
-                Statergy to impute the given column
-
-        Usage:
-
-            >> p = Process()
-            >> p.impute(dataframe, 'Age')
-        '''
-
-        return dataframe
->>>>>>> 808546fe7b50bfc73cbd8b4fdcbb0476b9d02214
