@@ -14,6 +14,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import StandardScaler
+
 import dateutil.parser as parser
 from geopy.geocoders import Nominatim
 
@@ -128,6 +129,25 @@ class Process(object):
         else:
             return False
         
+    @staticmethod
+    def count_missing(data):
+        ''' Return the count of missing values 
+
+        Paratmers:
+        ----------
+            data: pandas.core.series
+                given a column in pandas dataframe
+        
+        Usage:
+        -------
+            >>> p = Process()
+            >>> p.count_missing(df['col_name']) 
+            >>> 0
+
+        '''
+        return data.isnull().sum()
+
+
 
     @staticmethod
     def dict_query_string(query_dict):
@@ -213,24 +233,3 @@ class Process(object):
                 data[col] = label.transform(data[col])
 
         return (data, hash_map)
-
-    @staticmethod
-    def impute(dataframe, col_name, statergy='mean'):
-        ''' Return a dataframe which is complete imputed with respective
-        column mean value
-
-        Parameters:
-        -----------
-            dataframe : pandas.core.dataframe
-            col_name : str
-                column name to select for impute in dataframe
-            statergy : str default('mean') mean, median, min, max, std
-                Statergy to impute the given column
-
-        Usage:
-
-            >> p = Process()
-            >> p.impute(dataframe, 'Age')
-        '''
-
-        return dataframe

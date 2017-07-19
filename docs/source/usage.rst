@@ -8,42 +8,38 @@ Usage
 is_categorical:
 ----------------
 
-Parameters:
+**Parameters**:
 	
-	df: pandas.core.Dataframe
+			df: pandas.core.Dataframe
 		enter the complete dataframe
 
-	col_name: str
+		col_name: str
 
 
 
 
-Usage:
-------
-	>>> p = process()
-	>>> p.is_categorical(df['State'])
-	>>> True/False
+**Usage**:
+
+		>>> p = process()
+		>>> p.is_categorical(df['State'])
+		>>> True/False
 
 
 
 
 
-is_numbner:
-----------------
+count the missing values:
+-------------------------
 
-Parameters:
-	
-	df: pandas.core.Dataframe
-		enter the complete dataframe
-
-	col_name: str
+		**Parameters:**
+			col_name: str 
+				count the missing values in column
 		
 
 
 
-Usage:
-------
+**Usage**:
 
-	>>> p = process()
-	>>> p.is_categorical(df['State'])
-	>>> True/False
+		>>> p = process()
+		>>> P = Process()
+		>>> P.count_Nan(DATA['name'])
